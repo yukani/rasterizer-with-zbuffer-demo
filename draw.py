@@ -16,37 +16,6 @@ image = Image.new('RGB', (width, height))
 # Initialize z-buffer with +Infinity values.
 zbuffer = [[math.inf for x in range(width)] for y in range(height)]
 
-def drawline(p1, p2, color):
-	dx = p2[0] - p1[0]
-	dy = p2[1] - p1[1]
-
-	# if two points are the same.
-	if dx == 0 and dy == 0: return
-	elif dx == 0:
-		# if the line is vertical.
-
-		for y in range(abs(dy) + 1):
-			if dy >= 0: image.putpixel((p1[0], p1[1] + y), color)
-			else: image.putpixel((p1[0], p1[1] - y), color)
-	elif dy == 0:
-		# if the line is horizontal.
-
-		for x in range(abs(dx) + 1):
-			if dx >= 0: image.putpixel((p1[0] + x, p1[1]), color)
-			else: image.putpixel((p1[0] - x, p1[1]), color)
-	else:
-		if abs(dx) >= abs(dy): step = abs(dx)
-		else: step = abs(dy)
-
-		dx /= step
-		dy /= step
-
-		x, y = p1[0], p1[1]
-
-		for i in range(step + 1):
-			image.putpixel((int(x), int(y)), color)
-			x += dx
-			y += dy
 def drawtriangle(vp1, vp2, vp3, color):
 	# sort by y
 	if vp1[1] > vp2[1]: vp1, vp2 = vp2, vp1
